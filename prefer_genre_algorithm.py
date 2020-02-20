@@ -61,16 +61,42 @@ for i in range(15):
     # for key in genre_score:
     #     print(key, end=' ')
 
-    for key in genre_score:
-        a = comparison_movie_1_main_genre.split('\n')[1]
-        b = comparison_movie_1_second_genre.split('\n')[1]
-        #print(key)
-        #print(a)
-        #print(b)
-        if a == key:
-            genre_score[key] = genre_score[key] + 2
+    # 고객 선택 1번영화 or 2영화
+    customer_choice = comparison_movie_1
 
-        if b == key:
-            genre_score[key] = genre_score[key] + 1
+    # 고객 선택이 1번 영화면,
+    if customer_choice == comparison_movie_1 :
+        for key in genre_score:
+            selected_main_genre = comparison_movie_1_main_genre.split('\n')[1]
+            selected_second_genre = comparison_movie_1_second_genre.split('\n')[1]
+            #print(key)
+            #print(main_score)
+            #print(second_score)
+            if selected_main_genre  == key:
+                genre_score[key] = genre_score[key] + 2
+
+            if selected_second_genre == key:
+                genre_score[key] = genre_score[key] + 1
+
+    # 고객 선택이 2번 영화면,
+    elif customer_choice == comparison_movie_2 :
+        for key in genre_score:
+            selected_main_genre = comparison_movie_2_main_genre.split('\n')[1]
+            selected_second_genre = comparison_movie_2_second_genre.split('\n')[1]
+            # print(key)
+            # print(main_score)
+            # print(second_score)
+            if selected_main_genre == key:
+                genre_score[key] = genre_score[key] + 2
+
+            if selected_second_genre == key:
+                genre_score[key] = genre_score[key] + 1
 
     print(genre_score)
+
+#결과 값 도출
+# 값이 더해진 genre_score의 배열에서 [1] => 장르 스코어 값을 기준으로 내림차순(reverse=True)
+result = sorted(genre_score.items(), key=lambda x: x[1], reverse=True)
+print(result)
+print("첫번째 선호하는 장르는", result[0])
+print("두번째 선호하는 장르는", result[1])
