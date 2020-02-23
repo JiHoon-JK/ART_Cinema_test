@@ -3,7 +3,7 @@ from pymongo import MongoClient
 import random
 
 client = MongoClient('localhost', 27017)
-db = client.Short_Movie_Platform
+db = client.ART_Movie_Platform
 
 # all_long_movie 라는 변수에 DB값 담기
 all_long_movie = list(db.Long_movie_1.find({}))
@@ -39,9 +39,8 @@ genre_score = {
     'SF': 0,
     '액션': 0
 }
-for i in range(15):
-    a = 1
-    while a <= 20:
+for i in range(20):
+    while True:
         # 두개랜덤뽑아서 출력
         comparison_movie = random.sample(all_long_movie, 2)
         comparison_movie_1 = comparison_movie[0]
@@ -65,21 +64,21 @@ for i in range(15):
     customer_choice = comparison_movie_1
 
     # 고객 선택이 1번 영화면,
-    if customer_choice == comparison_movie_1 :
+    if customer_choice == comparison_movie_1:
         for key in genre_score:
             selected_main_genre = comparison_movie_1_main_genre.split('\n')[1]
             selected_second_genre = comparison_movie_1_second_genre.split('\n')[1]
-            #print(key)
-            #print(main_score)
-            #print(second_score)
-            if selected_main_genre  == key:
-                genre_score[key] = genre_score[key] + 2
+            # print(key)
+            # print(main_score)
+            # print(second_score)
+            if selected_main_genre == key:
+                genre_score[key] = genre_score[key] + 5
 
             if selected_second_genre == key:
-                genre_score[key] = genre_score[key] + 1
+                genre_score[key] = genre_score[key] + 3
 
     # 고객 선택이 2번 영화면,
-    elif customer_choice == comparison_movie_2 :
+    elif customer_choice == comparison_movie_2:
         for key in genre_score:
             selected_main_genre = comparison_movie_2_main_genre.split('\n')[1]
             selected_second_genre = comparison_movie_2_second_genre.split('\n')[1]
@@ -87,14 +86,14 @@ for i in range(15):
             # print(main_score)
             # print(second_score)
             if selected_main_genre == key:
-                genre_score[key] = genre_score[key] + 2
+                genre_score[key] = genre_score[key] + 5
 
             if selected_second_genre == key:
-                genre_score[key] = genre_score[key] + 1
+                genre_score[key] = genre_score[key] + 3
 
     print(genre_score)
 
-#결과 값 도출
+# 결과 값 도출
 # 값이 더해진 genre_score의 배열에서 [1] => 장르 스코어 값을 기준으로 내림차순(reverse=True)
 result = sorted(genre_score.items(), key=lambda x: x[1], reverse=True)
 print(result)
