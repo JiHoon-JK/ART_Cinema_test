@@ -4,12 +4,12 @@ from bs4 import BeautifulSoup
 from pymongo import MongoClient  # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
 
 client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
-db = client.Short_Movie_Platform  # 'Short_Movie_Platform' 이라는 이름의 db를 만듭니다.
+db = client.ART_Movie_Platform  # 'ART_Movie_Platform' 이라는 이름의 db를 만듭니다.
 
 driver = webdriver.Chrome('./chromedriver')
 url = 'https://movie.naver.com/movie/sdb/rank/rmovie.nhn?sel=pnt&date=20200213&tg='
 
-Long_drama_movie_ex = {
+Long_movie_ex = {
     'title': '',
     'poster': '',
     'director': '',
@@ -82,7 +82,7 @@ for i in range(19):
                 second_genre = '<2장르>' + '\n' + 'NONE'
             print(second_genre + '\n')
 
-            Long_drama_movie_ex = {
+            Long_movie_ex = {
                 'title': title,
                 'poster': poster,
                 'director': director,
@@ -94,8 +94,8 @@ for i in range(19):
             }
 
             # 하나의 딕셔너리로 변수를 만들어서, 효율적인 관리 추구
-            db.Long_movie_1.insert_one(Long_drama_movie_ex)
-            # DB에 'Long_movie_1' 라는 목록이름으로 저장
+            db.Long_movie_list.insert_one(Long_movie_ex)
+            # DB에 'Long_movie_list' 라는 목록이름으로 저장
 
         driver.back()
     driver.back()
