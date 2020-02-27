@@ -107,7 +107,7 @@ for k in range(4):
                     'genre_2': genre_2
                 }
                 # 첫번쨰 영화 디비에 넣어
-                # db.ART_movie_list.insert_one(ART_Movie_ex)
+                db.ART_movie_list.insert_one(ART_Movie_ex)
                 # 뒤로가기
                 driver.find_element_by_xpath("/html/body/div[3]/div[1]/div[1]/a[2]/span").click()
 
