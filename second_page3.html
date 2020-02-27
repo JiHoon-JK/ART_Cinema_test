@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>두번째 페이지</title>
+
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<!-- JS -->		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+	<!-- 구글폰트 -->
+	<link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap&subset=korean" rel="stylesheet">
+
+	<style type="text/css">
+
+		.wrap {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center; 
+		}
+
+		.bg_img{
+			background-image: url( "images/bg_poster_dark.png" );
+		}
+
+		.contents{
+			border: 1px solid;
+			border-radius: 30px;
+			background-color: #231f20;
+			margin-top:100px;
+			margin-bottom: 100px;
+		}
+
+		.title {
+			text-align: center;
+			font-size: 60px;
+			margin-top: 50px;
+			color:white;
+		}
+
+		.center {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.movie_contents {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			margin-top: 50px;
+			margin-bottom: 50px;
+			width: 1000px;
+			font-family: 'Poor Story', sans-serif;
+		}
+
+		.movie{
+			width:300px;
+			margin-right: 50px;
+			margin-left: 50px;
+			margin-top: 10px;
+			text-align: center;
+		}
+
+		.movie:hover{
+			/*visibility: hidden;*/
+			transform: scale(1.3);
+		}
+
+		#movie_title1{
+			font-weight: bold;
+		}
+
+		#movie_title2{
+			font-weight: bold;
+		}
+	</style>
+
+</head>
+<body>
+	<div class = "wrap bg_img">
+		<div class= "contents">
+			<div class="title">나의 선호 장르 찾기</div>
+			<div class = "movie_contents">
+				<div class="card-deck">
+					<!--첫번쨰 영화-->
+					<div class="movie">
+						<div class="card" style="width: 18rem;">
+							<img class="card-img-top" id = "movie_poster1" src="images/movie_poster.jpg" alt="Card image cap">
+							<div class="card-body">
+								<h5 class="card-title" id="movie_title1">기생충</h5>
+								<p class="card-text" id="movie_summary1">“폐 끼치고 싶진 않았어요”
+									전원백수로 살 길 막막하지만 사이는 좋은 기택(송강호) 가족.
+									장남 기우(최우식)에게 명문대생 친구가 연결시켜 준 고액 과외 자리는
+									모처럼 싹튼 고정수입의 희망이다.
+									온 가족의 도움과 기대 속에 박사장(이선균) 집으로 향하는 기우.
+									글로벌 IT기업 CEO인 박사장의 저택에 도착하자
+								젊고 아름다운 사모님 연교(조여정)가 기우를 맞이한다..</p>
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item" id="movie_director1">봉준호</li>
+								<li class="list-group-item" id="movie_actor1">송강호,이선균,조여정</li>
+							</ul>
+						</div>
+					</div>
+
+					<!--두번쨰 영화-->
+					<div class="movie">
+						<div class="card" style="width: 18rem;">
+							<img class="card-img-top" id = "movie_poster2" src="images/movie_poster.jpg" alt="Card image cap">
+							<div class="card-body">
+								<h5 class="card-title" id="movie_title2">기생충</h5>
+								<p class="card-text" id="movie_summary2" >“폐 끼치고 싶진 않았어요”
+									전원백수로 살 길 막막하지만 사이는 좋은 기택(송강호) 가족.
+									장남 기우(최우식)에게 명문대생 친구가 연결시켜 준 고액 과외 자리는
+									모처럼 싹튼 고정수입의 희망이다.
+									온 가족의 도움과 기대 속에 박사장(이선균) 집으로 향하는 기우.
+									글로벌 IT기업 CEO인 박사장의 저택에 도착하자
+								젊고 아름다운 사모님 연교(조여정)가 기우를 맞이한다..</p>
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item" id="movie_director2">봉준호</li>
+								<li class="list-group-item" id="movie_actor2">송강호,이선균,조여정</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
