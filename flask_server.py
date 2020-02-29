@@ -24,11 +24,16 @@ def page3():
 
 
 @app.route('/user', methods=['GET'])
-def Long_Movie_listing():
+def listing():
     result = list(db.Long_movie_list.find({}, {'_id': 0}))
     # articles라는 키 값으로 영화정보 내려주기
     return jsonify({'result': 'success', 'Long_movie_list': result})
 
+
+@app.route('/main', methods=['GET'])
+def listing2():
+    result = list(db.ART_movie_list.find({}, {'_id': 0}))
+    return jsonify({'result': 'success', 'ART_movie_list': result})
 
 @app.route('/art_user_genre_1', methods=['GET'])
 def ART_Movie_listing_genre_1():
@@ -55,17 +60,36 @@ def ART_Movie_listing_genre_2():
     return jsonify({'result': 'success', 'info': genre_2_movie_infos})
 
 
+
+
+
 # API 역할을 하는 부분
 @app.route('/user', methods=['POST'])
 def saving():
     email = request.form['email']
     pwd = request.form['pwd']
+    genre_1 = request.form['genre_1']
+    genre_2 = request.form['genre_2']
+
     data = {
         'email': email,
-        'pwd': pwd
+        'pwd': pwd,
+        'genre_1': genre_1,
+        'genre_2': genre_2
     }
 
     db.userdb.insert_one(data)
+    return jsonify({'result': 'success'})
+
+
+@app.route('/userupdate', methods=['POST'])
+def update():
+    genre_1 = request.form['genre_1']
+    genre_2 = request.form['genre_2']
+
+    db.userdb.update_one({'genre_1': ''}, {'$set': {'genre_1': genre_1}})
+    db.userdb.update_one({'genre_2': ''}, {'$set': {'genre_2': genre_2}})
+
     return jsonify({'result': 'success'})
 
 
