@@ -35,33 +35,6 @@ def listing2():
     result = list(db.ART_movie_list.find({}, {'_id': 0}))
     return jsonify({'result': 'success', 'ART_movie_list': result})
 
-@app.route('/art_user_genre_1', methods=['GET'])
-def ART_Movie_listing_genre_1():
-    # genre_1_give 로 사용자의 최종 선호 장르_1 대입
-    # 일단 임시로, "드라마"로 테스트
-    genre_1_movie_infos = list(db.ART_movie_list.find({'genre_1': '<장르1>' + '\n' + '드라마'}, {'_id': 0}))
-    print(genre_1_movie_infos)
-    for i in genre_1_movie_infos:
-        i['poster_url'] = str(i['poster']).split('\n')[1]
-    print(genre_1_movie_infos)
-
-    return jsonify({'result': 'success', 'info': genre_1_movie_infos})
-
-@app.route('/art_user_genre_2', methods=['GET'])
-def ART_Movie_listing_genre_2():
-    # genre_2_give 로 사용자의 최종 선호 장르_2 대입
-    # 임시로, "멜로/애정/로맨스"로 테스트
-    genre_2_movie_infos = list(db.ART_movie_list.find({'genre_2': '<장르2>' + '\n' + '멜로/애정/로맨스'}, {'_id': 0}))
-    print(genre_2_movie_infos)
-    for i in genre_2_movie_infos:
-        i['poster_url'] = str(i['poster']).split('\n')[1]
-    print(genre_2_movie_infos)
-
-    return jsonify({'result': 'success', 'info': genre_2_movie_infos})
-
-
-
-
 
 # API 역할을 하는 부분
 @app.route('/user', methods=['POST'])
