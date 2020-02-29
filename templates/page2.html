@@ -48,6 +48,7 @@
 
         function cng(img){
             if (cnt == imgs_1.length -1){
+               update_user('드라마', 'SF')
                $('.movie').remove()
                add_button_html = '<button id=button_result onclick="btn_result()">결과를 확인하시겠습니까?</button>'
                $('.contents').append(add_button_html)
@@ -69,31 +70,30 @@
             cnt++;
         }
 
-      function show(all_poster,all_title,all_summary,all_actor,all_director){
+        function show(all_poster,all_title,all_summary,all_actor,all_director){
 
-          for(var i= 0 ; i <= all_poster.length/2-1 ; i++){
-             poster_1[i]=all_poster[i].split('\n')[1]
-             poster_2[i]=all_poster[i + all_poster.length/2].split('\n')[1]
-             summary_1[i]=all_summary[i].split('\n')[1]
-             summary_2[i]=all_summary[i + all_poster.length/2].split('\n')[1]
-             director_1[i]=all_director[i].split('\n')[1]
-             director_2[i]=all_director[i + all_poster.length/2].split('\n')[1]
-             title_1[i]=all_title[i].split('\n')[1]
-             title_2[i]=all_title[i + all_poster.length/2].split('\n')[1]
-             actor_1[i]=all_actor[i].split('\n')[1]
-             actor_2[i]=all_actor[i + all_poster.length/2].split('\n')[1]
+            for(var i= 0 ; i <= all_poster.length/2-1 ; i++){
+            poster_1[i]=all_poster[i].split('\n')[1]
+            poster_2[i]=all_poster[i + all_poster.length/2].split('\n')[1]
+            summary_1[i]=all_summary[i].split('\n')[1]
+            summary_2[i]=all_summary[i + all_poster.length/2].split('\n')[1]
+            director_1[i]=all_director[i].split('\n')[1]
+            director_2[i]=all_director[i + all_poster.length/2].split('\n')[1]
+            title_1[i]=all_title[i].split('\n')[1]
+            title_2[i]=all_title[i + all_poster.length/2].split('\n')[1]
+            actor_1[i]=all_actor[i].split('\n')[1]
+            actor_2[i]=all_actor[i + all_poster.length/2].split('\n')[1]
             }
 
-          for(var i = 0 ; i<poster_1.length; i++){
-             imgs_1[i] = new Image()
-             imgs_2[i] = new Image()
+            for(var i = 0 ; i<poster_1.length; i++){
+                imgs_1[i] = new Image()
+                imgs_2[i] = new Image()
 
-             imgs_1[i].src = poster_1[i]
-             imgs_2[i].src = poster_2[i]
-
-          }
-          var next =1 ;
-      }
+                imgs_1[i].src = poster_1[i]
+                imgs_2[i].src = poster_2[i]
+            }
+            var next =1 ;
+        }
 
         function listing(){
             $.ajax({
@@ -136,8 +136,20 @@
             })
         }
 
-
-
+        <!--결과 선택 완료-->
+        function update_user(genre_1,genre_2){
+			$.ajax({
+              	type: "POST",
+              	url: "/userupdate",
+              	data: {
+               	 genre_1:genre_1,
+               	 genre_2:genre_2
+              	},
+              	success: function(response){
+              	console.log(response)
+              	}
+            })
+		}
     </script>
 
 

@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify, request
 from pymongo import MongoClient  # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
 
 client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
-db = client.Short_Movie_Platform  # 'dbsparta'라는 이름의 db를 만듭니다.
+db = client.ART_Movie_Platform  # 'dbsparta'라는 이름의 db를 만듭니다.
 
 app = Flask(__name__)
 
@@ -25,9 +25,15 @@ def page3():
 
 @app.route('/user', methods=['GET'])
 def listing():
-    result = list(db.Long_movie_1.find({}, {'_id': 0}))
+    result = list(db.Long_movie_list.find({}, {'_id': 0}))
     # articles라는 키 값으로 영화정보 내려주기
-    return jsonify({'result': 'success', 'Long_movie_1': result})
+    return jsonify({'result': 'success', 'Long_movie_list': result})
+
+
+@app.route('/main', methods=['GET'])
+def listing2():
+    result = list(db.ART_movie_list.find({}, {'_id': 0}))
+    return jsonify({'result': 'success', 'ART_movie_list': result})
 
 
 # API 역할을 하는 부분
@@ -35,12 +41,28 @@ def listing():
 def saving():
     email = request.form['email']
     pwd = request.form['pwd']
+    genre_1 = request.form['genre_1']
+    genre_2 = request.form['genre_2']
+
     data = {
         'email': email,
-        'pwd': pwd
+        'pwd': pwd,
+        'genre_1': genre_1,
+        'genre_2': genre_2
     }
 
     db.userdb.insert_one(data)
+    return jsonify({'result': 'success'})
+
+
+@app.route('/userupdate', methods=['POST'])
+def update():
+    genre_1 = request.form['genre_1']
+    genre_2 = request.form['genre_2']
+
+    db.userdb.update_one({'genre_1': ''}, {'$set': {'genre_1': genre_1}})
+    db.userdb.update_one({'genre_2': ''}, {'$set': {'genre_2': genre_2}})
+
     return jsonify({'result': 'success'})
 
 
