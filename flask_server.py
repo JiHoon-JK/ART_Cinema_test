@@ -39,29 +39,47 @@ def listing2():
 def ART_Movie_listing_genre_1():
     # genre_1_give 로 사용자의 최종 선호 장르_1 대입
     # 일단 임시로, "드라마"로 테스트
-    genre_1_movie_infos = list(db.ART_movie_list.find({'genre_1': '<장르1>' + '\n' + '드라마'}, {'_id': 0}))
-    print(genre_1_movie_infos)
-    for i in genre_1_movie_infos:
-        i['poster_url'] = str(i['poster']).split('\n')[1]
-    print(genre_1_movie_infos)
 
-    return jsonify({'result': 'success', 'info': genre_1_movie_infos})
+    #db에 저장되어있는 최종 선호장르1 을 가져오기
+    #user_info = db.userdb.find_one({'email':'???'},{'_id':0})
+    #user_genre_1 = user_info['genre_1']
+
+    genre_1_moive_infos = list(db.ART_movie_list.find({'genre_1': '<장르1>' + '\n' + user_genre_1}, {'_id': 0}))
+    print(genre_1_moive_infos)
+    for i in genre_1_moive_infos:
+        i['poster_url'] = str(i['poster']).split('\n')[1]
+    print(genre_1_moive_infos)
+    return jsonify({'result': 'success', 'ART_movie_list': genre_1_moive_infos})
 
 @app.route('/art_user_genre_2', methods=['GET'])
 def ART_Movie_listing_genre_2():
     # genre_2_give 로 사용자의 최종 선호 장르_2 대입
     # 임시로, "멜로/애정/로맨스"로 테스트
-    genre_2_movie_infos = list(db.ART_movie_list.find({'genre_2': '<장르2>' + '\n' + '멜로/애정/로맨스'}, {'_id': 0}))
+
+
+    #db에 저장되어있는 최종 선호장르2 을 가져오기
+    #user_info = db.userdb.find_one({'email':'???'},{'_id':0})
+    #user_genre_2 = user_info['genre_2']
+
+    genre_2_movie_infos = list(db.ART_movie_list.find({'genre_2': '<장르2>' + '\n' + user_genre_2}, {'_id': 0}))
     print(genre_2_movie_infos)
     for i in genre_2_movie_infos:
         i['poster_url'] = str(i['poster']).split('\n')[1]
     print(genre_2_movie_infos)
 
-    return jsonify({'result': 'success', 'info': genre_2_movie_infos})
+    return jsonify({'result': 'success', 'ART_movie_list': genre_2_movie_infos})
 
+@app.route('/userbring', methods=['GET'])
+def bring():
+    user_info = list(db.userdb.find_one({'email':email},{'_id': 0}))
+    user_genre_1 = user_info['genre_1']
+    user_genre_2 = user_info['genre_2']
 
+    print(user_info)
+    print(user_genre_1)
+    print(user_genre_2)
 
-
+    return jsonify({'result': 'success', 'userdb': user_info})
 
 # API 역할을 하는 부분
 @app.route('/user', methods=['POST'])
