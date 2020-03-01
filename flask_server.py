@@ -23,22 +23,26 @@ def page2():
 def page3():
     return render_template('page3.html')
 
-
-@app.route('/user', methods=['GET'])
+#장편영화 get방식
+@app.route('/long_movie', methods=['GET'])
 def listing():
     result = list(db.Long_movie_list.find({}, {'_id': 0}))
-    # articles라는 키 값으로 영화정보 내려주기
     return jsonify({'result': 'success', 'Long_movie_list': result})
 
-
+#단편영화 get방식
 @app.route('/main', methods=['GET'])
 def listing2():
     result = list(db.ART_movie_list.find({}, {'_id': 0}))
     return jsonify({'result': 'success', 'ART_movie_list': result})
 
+#고객정보 get방식 (userdb)
+@app.route('/customer', methods=['GET'])
+def user_listing():
+    result = list(db.userdb.find({}, {'_id': 0}))
+    return jsonify({'result': 'success', 'userdb': result})
 
-# API 역할을 하는 부분
-@app.route('/user', methods=['POST'])
+#고객정보 post방식(userdb)
+@app.route('/customer', methods=['POST'])
 def saving():
     email = request.form['email']
     pwd = request.form['pwd']
@@ -55,8 +59,8 @@ def saving():
     db.userdb.insert_one(data)
     return jsonify({'result': 'success'})
 
-
-# @app.route('/user2', methods=['GET'])
+#점수계산하는 get방식
+# @app.route('/user_genre', methods=['GET'])
 # def listing3():
 #     # 모든 document 찾기 & _id 값은 출력에서 제외하기
 #     result = list(db.customer_genre.find({}, {'_id': 0}))
@@ -64,8 +68,8 @@ def saving():
 #     return jsonify({'result': 'success', 'genres': result})
 
 
-
-@app.route('/user2', methods=['POST'])
+#점수계산하기 post방식
+@app.route('/user_genre', methods=['POST'])
 def genre_cnt():
     # 장르마다 점수 값 배정
     genre_score = {
