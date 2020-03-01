@@ -22,9 +22,6 @@
     <link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap&subset=korean" rel="stylesheet">
 
     <script>
-
-        listing();
-
         var imgs_1 = new Array()
         var imgs_2 = new Array()
         var poster_1 = new Array()
@@ -38,13 +35,11 @@
         var actor_1 = new Array()
         var actor_2 = new Array()
 
-        var next = 0;
+        var next = 1;
+
         var cnt = 0;
+	    listing();
 
-
-        function btn_result(){
-            location.href="/page3"
-        }
 
         function cng(img){
             if (cnt == imgs_1.length -1){
@@ -66,7 +61,9 @@
             $('#movie_actor2').text(actor_2[next])
 
             next++;
+
             next%=imgs_1.length;
+
             cnt++;
         }
 
@@ -92,7 +89,6 @@
                 imgs_1[i].src = poster_1[i]
                 imgs_2[i].src = poster_2[i]
             }
-            var next =1 ;
         }
 
         function listing(){
@@ -131,6 +127,17 @@
                         all_main_genre.push(main_genre)
                         all_second_genre.push(second_genre)
                     }
+                    $('#movie_title1').text(all_title[0])
+                    $('#movie_title2').text(all_title[all_poster.length/2])
+                    $('#movie_summary1').text(all_summary[0])
+                    $('#movie_summary2').text(all_summary[all_poster.length/2])
+                    $('#movie_director1').text(all_director[0])
+                    $('#movie_director2').text(all_director[all_poster.length/2])
+                    $('#movie_actor1').text(all_actor[0])
+                    $('#movie_actor2').text(all_actor[all_poster.length/2])
+                    $('#movie_poster1').attr('src',all_poster[0].split('\n')[1])
+                    $('#movie_poster2').attr('src',all_poster[all_poster.length/2].split('\n')[1])
+
                     show(all_poster,all_title,all_summary,all_actor,all_director)
                 }
             })
@@ -150,6 +157,11 @@
               	}
             })
 		}
+
+		function btn_result(){
+            location.href="/page3"
+        }
+
     </script>
 
 
@@ -221,42 +233,30 @@
                 <!--첫번쨰 영화-->
                 <div class="movie">
                     <div class="card" style="width: 18rem;">
-                        <img style="border:10px ridge wheat" class="card-img-top" id="movie_poster1" src="static/movie_poster.jpg" alt="Card image cap"
+                        <img style="border:10px ridge wheat" class="card-img-top" id="movie_poster1" src="" alt="Card image cap"
                          onclick="cng(this)">
                         <div class="card-body">
-                            <h5 class="card-title" id="movie_title1">기생충</h5>
-                            <p class="card-text" id="movie_summary1">“폐 끼치고 싶진 않았어요”
-                                전원백수로 살 길 막막하지만 사이는 좋은 기택(송강호) 가족.
-                                장남 기우(최우식)에게 명문대생 친구가 연결시켜 준 고액 과외 자리는
-                                모처럼 싹튼 고정수입의 희망이다.
-                                온 가족의 도움과 기대 속에 박사장(이선균) 집으로 향하는 기우.
-                                글로벌 IT기업 CEO인 박사장의 저택에 도착하자
-                                젊고 아름다운 사모님 연교(조여정)가 기우를 맞이한다..</p>
+                            <h5 class="card-title" id="movie_title1"></h5>
+                            <p class="card-text" id="movie_summary1"></p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item" id="movie_director1">봉준호</li>
-                            <li class="list-group-item" id="movie_actor1">송강호,이선균,조여정</li>
+                            <li class="list-group-item" id="movie_director1"></li>
+                            <li class="list-group-item" id="movie_actor1"></li>
                         </ul>
                     </div>
                 </div>
                 <!--두번쨰 영화-->
                 <div class="movie">
                     <div class="card" style="width: 18rem;">
-                        <img style="border:10px ridge wheat" class="card-img-top" id="movie_poster2" src="static/movie_poster.jpg" alt="Card image cap"
+                        <img style="border:10px ridge wheat" class="card-img-top" id="movie_poster2" src="" alt="Card image cap"
                          onclick="cng(this)">
                         <div class="card-body">
-                            <h5 class="card-title" id="movie_title2">기생충</h5>
-                            <p class="card-text" id="movie_summary2">“폐 끼치고 싶진 않았어요”
-                                전원백수로 살 길 막막하지만 사이는 좋은 기택(송강호) 가족.
-                                장남 기우(최우식)에게 명문대생 친구가 연결시켜 준 고액 과외 자리는
-                                모처럼 싹튼 고정수입의 희망이다.
-                                온 가족의 도움과 기대 속에 박사장(이선균) 집으로 향하는 기우.
-                                글로벌 IT기업 CEO인 박사장의 저택에 도착하자
-                                젊고 아름다운 사모님 연교(조여정)가 기우를 맞이한다..</p>
+                            <h5 class="card-title" id="movie_title2"></h5>
+                            <p class="card-text" id="movie_summary2"></p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item" id="movie_director2">봉준호</li>
-                            <li class="list-group-item" id="movie_actor2">송강호,이선균,조여정</li>
+                            <li class="list-group-item" id="movie_director2"></li>
+                            <li class="list-group-item" id="movie_actor2"></li>
                         </ul>
                     </div>
                 </div>
