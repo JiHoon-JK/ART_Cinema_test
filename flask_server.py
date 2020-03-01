@@ -6,6 +6,7 @@ db = client.ART_Movie_Platform  # 'dbsparta'라는 이름의 db를 만듭니다.
 
 app = Flask(__name__)
 
+all_long_movie = list(db.Long_movie_list.find({}))
 
 # HTML을 주는 부분
 @app.route('/')
@@ -53,6 +54,74 @@ def saving():
 
     db.userdb.insert_one(data)
     return jsonify({'result': 'success'})
+
+
+# @app.route('/user2', methods=['GET'])
+# def listing3():
+#     # 모든 document 찾기 & _id 값은 출력에서 제외하기
+#     result = list(db.customer_genre.find({}, {'_id': 0}))
+#     # genres라는 키 값으로 영화정보 내려주기
+#     return jsonify({'result': 'success', 'genres': result})
+
+
+
+@app.route('/user2', methods=['POST'])
+def genre_cnt():
+    # 장르마다 점수 값 배정
+    genre_score = {
+        '드라마': 0,
+        '판타지': 0,
+        '공포': 0,
+        '멜로/애정/로맨스': 0,
+        '모험': 0,
+        '스릴러': 0,
+        '느와르': 0,
+        '다큐멘터리': 0,
+        '코미디': 0,
+        '가족': 0,
+        '미스터리': 0,
+        '전쟁': 0,
+        '에니메이션': 0,
+        '범죄': 0,
+        '뮤지컬': 0,
+        'SF': 0,
+        '액션': 0
+    }
+    choice_title = request.form['m_title_give']
+    print("test")
+    print(choice_title)
+
+    for i in range(len(all_long_movie)):
+        if choice_title == all_long_movie[i].get('title').split('\n')[1]:
+            selected_main_genre = all_long_movie[i].get('main_genre').split('\n')[1]
+            selected_second_genre = all_long_movie[i].get('second_genre').split('\n')[1]
+            for key in genre_score:
+                if selected_main_genre == key:
+                    genre_score[key] = genre_score[key] + 2
+
+                if selected_second_genre == key:
+                    genre_score[key] = genre_score[key] + 1
+
+    print(genre_score)
+
+    # 결과 값 도출
+    result = sorted(genre_score.items(), key=lambda x: x[1], reverse=True)
+    #print(result)
+    customer_main_genre = result[0][0]
+    customer_second_genre = result[1][0]
+    print("첫번째 선호하는 장르는", customer_main_genre)
+    print("두번째 선호하는 장르는", customer_second_genre)
+
+    genre_data = {
+        'main_genre': customer_main_genre,
+        'second_genre': customer_second_genre
+    }
+    db.customer_genre.insert_one(genre_data)
+    # db.customer_genre.update_one(genre_data)
+
+    return jsonify({'result': 'success'})
+
+
 
 
 @app.route('/userupdate', methods=['POST'])
